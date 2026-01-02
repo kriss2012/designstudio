@@ -1,0 +1,7 @@
+Flask
+Flask-SQLAlchemy
+Flask-Cors
+authlib
+requests
+razorpay
+python-dotenv

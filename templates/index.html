@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>DesignStudio | Premium Web Services</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,20 +25,29 @@
         <div class="nav-actions">
             <div id="userProfile" class="user-menu-group hidden">
                 <button onclick="toggleDashboard()" class="btn-dash-trigger">
-                    <i class="fas fa-columns"></i> Dashboard
+                    <i class="fas fa-columns"></i>
+                    <span class="btn-text">Dashboard</span>
                 </button>
                 <img id="userAvatar" src="" alt="User">
             </div>
             <button id="loginBtn" class="btn btn-primary">Login</button>
+            <!-- Hamburger: shown on mobile only via CSS -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
     <section id="home" class="hero">
-        <div class="container">
+        <div class="container" style="display:flex;flex-direction:column;align-items:center;">
             <h1 class="hero-title">Digital Excellence.<br>Delivered.</h1>
             <p class="hero-subtitle">Premium web development with 6 months of free dedicated support. We build future-proof digital experiences.</p>
-            <button class="btn btn-primary" onclick="scrollToSection('portfolio')">View Projects</button>
-            <button class="btn btn-secondary" onclick="scrollToSection('maintenance')">View Plans</button>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;width:100%;max-width:360px;">
+                <button class="btn btn-primary" style="flex:1;min-width:130px;" onclick="scrollToSection('portfolio')">View Projects</button>
+                <button class="btn btn-secondary" style="flex:1;min-width:130px;" onclick="scrollToSection('maintenance')">View Plans</button>
+            </div>
         </div>
     </section>
 
@@ -52,7 +61,7 @@
 
     <section id="maintenance" class="container">
         <div class="section-header">
-            <h2>Maintenance & Support</h2>
+            <h2>Maintenance & amp; Support</h2>
             <p style="color: var(--text-muted);">Comprehensive care for your digital assets.</p>
         </div>
         <div class="services-grid">
@@ -60,53 +69,65 @@
                 <i class="fas fa-shield-alt" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;"></i>
                 <h3>Standard Warranty</h3>
                 <p style="color: #9ca3af; margin-bottom: 1rem;">Included with every project.</p>
-                <ul style="list-style: none; color: #9ca3af; font-size: 0.9rem;">
-                    <li><i class="fas fa-check"></i> 6 Months Free Support</li>
-                    <li><i class="fas fa-check"></i> Critical Bug Fixes</li>
-                    <li><i class="fas fa-check"></i> Monthly Backups</li>
+                <ul style="list-style: none; color: #9ca3af; font-size: 0.9rem; display:flex;flex-direction:column;gap:6px;">
+                    <li><i class="fas fa-check" style="color:var(--primary);margin-right:6px;"></i> 6 Months Free Support</li>
+                    <li><i class="fas fa-check" style="color:var(--primary);margin-right:6px;"></i> Critical Bug Fixes</li>
+                    <li><i class="fas fa-check" style="color:var(--primary);margin-right:6px;"></i> Monthly Backups</li>
                 </ul>
             </div>
             <div class="service-card" style="border-color: var(--primary);">
                 <i class="fas fa-rocket" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;"></i>
                 <h3>Premium Care</h3>
                 <p style="color: #9ca3af; margin-bottom: 1rem;">For growing businesses.</p>
-                <ul style="list-style: none; color: #9ca3af; font-size: 0.9rem;">
-                    <li><i class="fas fa-check"></i> Priority 24/7 Support</li>
-                    <li><i class="fas fa-check"></i> Feature Updates</li>
-                    <li><i class="fas fa-check"></i> SEO Monitoring</li>
+                <ul style="list-style: none; color: #9ca3af; font-size: 0.9rem; display:flex;flex-direction:column;gap:6px;">
+                    <li><i class="fas fa-check" style="color:var(--primary);margin-right:6px;"></i> Priority 24/7 Support</li>
+                    <li><i class="fas fa-check" style="color:var(--primary);margin-right:6px;"></i> Feature Updates</li>
+                    <li><i class="fas fa-check" style="color:var(--primary);margin-right:6px;"></i> SEO Monitoring</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 DesignStudio. Built by Krishna Patil.</p>
+        <div class="container" style="padding-top:0;padding-bottom:0;">
+            <p>& copy; 2026 DesignStudio. Built by Krishna Patil.</p>
             <p><a href="{{ payment_link }}" target="_blank" style="color: var(--primary); text-decoration: none;">Pay via Razorpay Link</a></p>
         </div>
     </footer>
 
+    <!-- CLIENT DASHBOARD -->
     <section id="clientDashboard" class="dashboard-view">
         <div class="sidebar">
-            <div class="logo" style="margin-bottom: 3rem;">
-                <i class="fas fa-cube" style="color: var(--primary);"></i> DesignStudio
+            <div class="logo" style="flex-shrink:0;">
+                <i class="fas fa-cube" style="color: var(--primary);"></i>
+                <span>DesignStudio</span>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#" class="sidebar-link active" onclick="switchDashTab('dash-overview')"><i class="fas fa-home"></i> Overview</a></li>
-                <li><a href="#" class="sidebar-link" onclick="switchDashTab('dash-orders')"><i class="fas fa-shopping-bag"></i> My Orders</a></li>
-                <li><a href="#" class="sidebar-link" onclick="switchDashTab('dash-maintenance')"><i class="fas fa-tools"></i> Request Support</a></li>
+                <li><a href="#" class="sidebar-link active" onclick="switchDashTab('dash-overview')"><i class="fas fa-home"></i> <span>Overview</span></a></li>
+                <li><a href="#" class="sidebar-link" onclick="switchDashTab('dash-orders')"><i class="fas fa-shopping-bag"></i> <span>My Orders</span></a></li>
+                <li><a href="#" class="sidebar-link" onclick="switchDashTab('dash-maintenance')"><i class="fas fa-tools"></i> <span>Support</span></a></li>
             </ul>
-            <div style="margin-top: auto;">
-                <button onclick="window.location.href='/logout'" class="btn btn-secondary" style="width: 100%; border-color: #ef4444; color: #ef4444;">Logout</button>
-                <button onclick="toggleDashboard()" class="btn btn-secondary" style="width: 100%; margin-top: 10px; border:none;">Close View</button>
+            <!-- Desktop close/logout buttons; hidden on mobile via sidebar-footer class -->
+            <div class="sidebar-footer" style="margin-top:auto;display:flex;flex-direction:column;gap:8px;padding-top:1rem;">
+                <button onclick="window.location.href='/logout'" class="btn btn-secondary" style="width:100%;border-color:#ef4444;color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <button onclick="toggleDashboard()" class="btn btn-secondary" style="width:100%;border:none;"><i class="fas fa-times"></i> Close</button>
             </div>
         </div>
 
         <div class="dashboard-content">
+            <!-- Mobile-only close strip -->
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(255,255,255,0.06);" class="mobile-dash-header">
+                <span style="font-size:0.9rem;color:var(--text-muted);">My Dashboard</span>
+                <div style="display:flex;gap:8px;">
+                    <button onclick="window.location.href='/logout'" class="btn btn-secondary" style="padding:6px 12px;font-size:0.8rem;border-color:#ef4444;color:#ef4444;">Logout</button>
+                    <button onclick="toggleDashboard()" class="btn btn-secondary" style="padding:6px 12px;font-size:0.8rem;">&times; Close</button>
+                </div>
+            </div>
+
             <div id="dash-overview" class="dash-tab">
                 <div class="dash-header">
                     <h2>Welcome back, <span id="dashUserName">User</span></h2>
-                    <span class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 5px 10px; border-radius: 20px;">Client Account</span>
+                    <span class="tag" style="background:rgba(99,102,241,0.1);color:var(--primary);padding:5px 12px;border-radius:20px;font-size:0.8rem;">Client Account</span>
                 </div>
                 <div class="status-card-grid">
                     <div class="stat-box">
@@ -122,14 +143,14 @@
 
             <div id="dash-orders" class="dash-tab hidden">
                 <div class="dash-header"><h2>Order History</h2></div>
-                <div style="background: var(--bg-card); border-radius: 12px; overflow: hidden;">
-                    <table style="width: 100%; border-collapse: collapse; color: var(--text-muted);">
-                        <thead style="background: rgba(255,255,255,0.05);">
+                <div style="background:var(--bg-card);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                    <table style="width:100%;border-collapse:collapse;color:var(--text-muted);min-width:420px;">
+                        <thead style="background:rgba(255,255,255,0.05);">
                             <tr>
-                                <th style="padding: 15px; text-align: left;">Date</th>
-                                <th style="padding: 15px; text-align: left;">Project</th>
-                                <th style="padding: 15px; text-align: left;">Amount</th>
-                                <th style="padding: 15px; text-align: left;">Status</th>
+                                <th style="padding:12px 14px;text-align:left;font-size:0.85rem;">Date</th>
+                                <th style="padding:12px 14px;text-align:left;font-size:0.85rem;">Project</th>
+                                <th style="padding:12px 14px;text-align:left;font-size:0.85rem;">Amount</th>
+                                <th style="padding:12px 14px;text-align:left;font-size:0.85rem;">Status</th>
                             </tr>
                         </thead>
                         <tbody id="dashOrdersTable"></tbody>
@@ -139,70 +160,140 @@
 
             <div id="dash-maintenance" class="dash-tab hidden">
                 <div class="dash-header"><h2>Support Request</h2></div>
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
-                    <form id="enhancedMaintForm" style="background: var(--bg-card); padding: 2rem; border-radius: 12px;">
-                        <div class="form-group" style="margin-bottom: 1.5rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Issue Type</label>
-                            <select id="maintIssueType" style="width: 100%; padding: 10px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 8px;">
+                <!-- Responsive grid via CSS class -->
+                <div class="maint-grid">
+                    <form id="enhancedMaintForm" style="background:var(--bg-card);padding:1.5rem;border-radius:12px;">
+                        <div style="margin-bottom:1.25rem;">
+                            <label style="display:block;margin-bottom:0.5rem;color:var(--text-muted);font-size:0.9rem;">Issue Type</label>
+                            <select id="maintIssueType">
                                 <option value="Bug Fix">Bug Fix (Covered under Warranty)</option>
                                 <option value="Content Update">Content Update</option>
                                 <option value="New Feature">New Feature Development</option>
                             </select>
                         </div>
                         
-                        <div class="form-group" style="margin-bottom: 1.5rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Description</label>
-                            <textarea id="maintDesc" rows="4" style="width: 100%; padding: 10px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 8px;"></textarea>
+                        <div style="margin-bottom:1.25rem;">
+                            <label style="display:block;margin-bottom:0.5rem;color:var(--text-muted);font-size:0.9rem;">Description</label>
+                            <textarea id="maintDesc" rows="4" placeholder="Describe your issue..."></textarea>
                         </div>
 
-                        <div class="addon-group" style="margin-top: 2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 8px;">
-                            <h4 style="margin-bottom: 1rem; color: white;">Premium Add-ons</h4>
-                            <div class="checkbox-item" style="display:flex; justify-content:space-between; margin-bottom: 10px;">
-                                <label><input type="checkbox" class="addon-check" value="5000"> Priority Support</label>
-                                <span>+₹5,000</span>
+                        <div class="addon-group" style="border:1px solid var(--border);">
+                            <h4 style="margin-bottom:1rem;color:white;font-size:0.95rem;">Premium Add-ons</h4>
+                            <div class="checkbox-item">
+                                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="addon-check" value="5000"> Priority Support</label>
+                                <span style="color:var(--primary);font-weight:600;font-size:0.9rem;">+₹5,000</span>
                             </div>
-                            <div class="checkbox-item" style="display:flex; justify-content:space-between;">
-                                <label><input type="checkbox" class="addon-check" value="8000"> SEO Optimization</label>
-                                <span>+₹8,000</span>
+                            <div class="checkbox-item" style="border-bottom:none;">
+                                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="addon-check" value="8000"> SEO Optimization</label>
+                                <span style="color:var(--primary);font-weight:600;font-size:0.9rem;">+₹8,000</span>
                             </div>
                         </div>
 
-                        <div class="cost-display" style="font-size: 1.5rem; color: var(--primary); text-align: right; margin: 1rem 0;">
+                        <div class="cost-display">
                             Estimated: <span id="estCost">₹0</span>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                        <button type="submit" class="btn btn-primary btn-full" style="margin-top:1rem;">Submit Request</button>
                     </form>
                     
-                    <div style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 12px; height: fit-content; border: 1px solid var(--primary);">
-                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Warranty Info</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">You are in the 6-month free support period.</p>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Bug fixes are free. New features and addons are paid.</p>
+                    <div style="background:rgba(99,102,241,0.1);padding:1.25rem;border-radius:12px;height:fit-content;border:1px solid var(--primary);">
+                        <h3 style="color:var(--primary);margin-bottom:0.75rem;font-size:1rem;">Warranty Info</h3>
+                        <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.6;">You are in the 6-month free support period.</p>
+                        <p style="color:var(--text-muted);font-size:0.88rem;margin-top:8px;line-height:1.6;">Bug fixes are free. New features and add-ons are paid.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ORDER MODAL -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
-            <button class="btn-secondary" onclick="closeModal('orderModal')" style="float: right;">&times;</button>
+            <button onclick="closeModal('orderModal')" style="position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:1px solid var(--border);color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;">&times;</button>
             <div id="orderDetails"></div>
         </div>
     </div>
     
+    <!-- PROJECT MODAL -->
     <div id="projectModal" class="modal">
         <div class="modal-content">
-            <button class="btn-secondary" onclick="closeModal('projectModal')" style="float: right;">&times;</button>
+            <button onclick="closeModal('projectModal')" style="position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:1px solid var(--border);color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;">&times;</button>
             <div id="projectDetails"></div>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content" style="border-radius:20px;max-width:420px;border-bottom:1px solid var(--border);">
+            <button onclick="closeModal('adminLoginModal')" style="position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:1px solid var(--border);color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;">&times;</button>
+            <h2 style="margin-bottom:1.5rem;">Admin Login</h2>
+            <form id="adminLoginForm">
+                <div style="margin-bottom:1rem;">
+                    <label style="display:block;margin-bottom:0.5rem;color:var(--text-muted);font-size:0.9rem;">Email</label>
+                    <input type="email" id="adminEmail" placeholder="admin@example.com">
+                </div>
+                <div style="margin-bottom:1.5rem;">
+                    <label style="display:block;margin-bottom:0.5rem;color:var(--text-muted);font-size:0.9rem;">Password</label>
+                    <input type="password" id="adminPassword" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="adminDashboard">
+        <div class="sidebar">
+            <div class="logo" style="flex-shrink:0;">
+                <i class="fas fa-cube" style="color:var(--primary);"></i>
+                <span>Admin</span>
+            </div>
+            <ul class="sidebar-menu" id="adminMenu">
+                <li><button class="admin-menu-item active" data-tab="overview"><i class="fas fa-chart-bar"></i> <span>Overview</span></button></li>
+                <li><button class="admin-menu-item" data-tab="users"><i class="fas fa-users"></i> <span>Users</span></button></li>
+                <li><button class="admin-menu-item" data-tab="orders"><i class="fas fa-box"></i> <span>Orders</span></button></li>
+                <li><button class="admin-menu-item" data-tab="maintenance"><i class="fas fa-tools"></i> <span>Maintenance</span></button></li>
+                <li><button class="admin-menu-item" data-tab="contacts"><i class="fas fa-envelope"></i> <span>Contacts</span></button></li>
+            </ul>
+            <div class="sidebar-footer" style="margin-top:auto;padding-top:1rem;">
+                <button onclick="closeAdminDashboard()" class="btn btn-secondary" style="width:100%;"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+        <div style="overflow-y:auto;-webkit-overflow-scrolling:touch;padding:80px 1.5rem 2rem;">
+            <!-- Mobile close button -->
+            <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;" class="mobile-dash-header">
+                <button onclick="closeAdminDashboard()" class="btn btn-secondary" style="font-size:0.82rem;padding:6px 14px;">&times; Close</button>
+            </div>
+            <div id="adminContent"></div>
         </div>
     </div>
 
     <div id="toast" class="toast"></div>
 
-    <script>const CURRENT_USER = {{ user | tojson | safe }} || null;</script>
+    <script>
+    const CURRENT_USER = {{ user | tojson | default('null') | safe }};
+</script>
     <script src="{{ url_for('static', filename='auth.js') }}"></script>
     <script src="{{ url_for('static', filename='admin.js') }}"></script>
     <script src="{{ url_for('static', filename='orders.js') }}"></script>
     <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+    <script>
+    // Mobile hamburger toggle (supplement to app.js setupNavigation)
+    document.getElementById('hamburger')?.addEventListener('click', function() {
+        document.getElementById('navMenu').classList.toggle('active');
+    });
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navMenu').classList.remove('active');
+        });
+    });
+    // Hide mobile-dash-header on desktop
+    (function() {
+        var style = document.createElement('style');
+        style.textContent = '@media (min-width: 641px) { .mobile-dash-header { display: none !important; } }';
+        document.head.appendChild(style);
+    })();
+    </script>
 </body>
 </html>
